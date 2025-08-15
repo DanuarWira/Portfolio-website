@@ -45,13 +45,13 @@ export default function ProjectSlideSection() {
   const trackWidth = cardWidthWithMargin * duplicatedProjects.length;
   return (
     <>
-      <div className="w-full max-w-8xl mx-auto relative overflow-hidden group py-4" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
+      <section className="w-full max-w-8xl mx-auto relative overflow-hidden group py-4" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
         <div className="flex animate-scroll group-hover:[animation-play-state:paused]" style={{ width: `${trackWidth}px` }}>
           {duplicatedProjects.map((project, index) => (
             <ProjectCard key={index} title={project.title} categories={project.categories} imageUrl={project.imageUrl} />
           ))}
         </div>
-      </div>
+      </section>
       <style jsx global>{`
         @keyframes scroll {
           0% {
