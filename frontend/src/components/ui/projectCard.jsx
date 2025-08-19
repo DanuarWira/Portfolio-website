@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 export default function ProjectCard({ title, categories, imageUrl }) {
   return (
     <div className="flex-shrink-0 w-[400px] h-[300px] mx-3">
       <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
-        <img src={imageUrl} alt={`Tampilan proyek ${title}`} className="absolute inset-0 w-full h-full object-cover" />
+        <Image src={imageUrl} alt={`Tampilan proyek ${title}`} width={400} height={300} className="w-full h-auto aspect-[4/3] absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
         <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
           <h3 className="text-2xl font-bold">{title}</h3>

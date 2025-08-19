@@ -1,4 +1,5 @@
 import ExperienceCard from "../ui/experienceCard";
+import ScrollFadeIn from "@/styles/animation";
 
 export default function WorkingExperiencesSection() {
   return (

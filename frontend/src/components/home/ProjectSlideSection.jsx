@@ -5,37 +5,37 @@ const projects = [
   {
     title: "Explorin App",
     categories: ["Mobile App", "UI/UX Design"],
-    imageUrl: "https://placehold.co/400x300/1a1a1a/ffffff?text=Proyek+1",
+    imageUrl: "/Dribbble shot HD - 1.png",
   },
   {
     title: "E-Commerce Fashion",
     categories: ["Web Design", "Branding"],
-    imageUrl: "https://placehold.co/400x300/4a1a3a/ffffff?text=Proyek+2",
+    imageUrl: "/Dribbble shot HD - 1.png",
   },
   {
     title: "Dashboard Analitik",
     categories: ["Data Viz", "Web App"],
-    imageUrl: "https://placehold.co/400x300/1a4a2a/ffffff?text=Proyek+3",
+    imageUrl: "/Dribbble shot HD - 1.png",
   },
   {
     title: "Crypto Wallet",
     categories: ["Fintech", "Security"],
-    imageUrl: "https://placehold.co/400x300/4a4a1a/ffffff?text=Proyek+4",
+    imageUrl: "/Dribbble shot HD - 1.png",
   },
   {
     title: "Travel Booking",
     categories: ["Web Platform"],
-    imageUrl: "https://placehold.co/400x300/1a3a4a/ffffff?text=Proyek+5",
+    imageUrl: "/Dribbble shot HD - 1.png",
   },
   {
     title: "Music Player",
     categories: ["Mobile App"],
-    imageUrl: "https://placehold.co/400x300/4a1a1a/ffffff?text=Proyek+6",
+    imageUrl: "/Dribbble shot HD - 1.png",
   },
   {
     title: "Smart Home UI",
     categories: ["IoT", "Dashboard"],
-    imageUrl: "https://placehold.co/400x300/3a3a3a/ffffff?text=Proyek+7",
+    imageUrl: "/Dribbble shot HD - 1.png",
   },
 ];
 
