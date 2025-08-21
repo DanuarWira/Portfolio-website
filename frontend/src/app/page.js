@@ -8,6 +8,7 @@ import WorkingExperiencesSection from "@/components/home/WorkingExperiencesSecti
 import ProjectShowcaseSection from "@/components/home/ProjectShowcaseSection";
 import ArticleSection from "@/components/home/ArticleSection";
 import Footer from "@/components/shared/footer";
+import ContactSection from "@/components/home/ContactSection";
 
 export default function Home() {
   return (
@@ -15,8 +16,8 @@ export default function Home() {
       <Navbar />
       <main className="relative overflow-x-hidden">
         <div className="blob-1 w-[1312px] h-[1312px] absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_#742AE4_0%,_rgba(71,_19,_150,_0.50)_50%,_rgba(10,_10,_10,_0)_100%)] rounded-full -z-10 blur-3xl" />
-        <div className="w-[1312px] h-[1312px] absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_#742AE4_0%,_rgba(71,_19,_150,_0.50)_50%,_rgba(10,_10,_10,_0)_100%)] rounded-full -z-10 blur-3xl" />
-        <div className="w-[1312px] h-[1312px] absolute top-[65%] left-0 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_#742AE4_0%,_rgba(71,_19,_150,_0.50)_50%,_rgba(10,_10,_10,_0)_100%)] rounded-full -z-10 blur-3xl" />
+        <div className="w-[1312px] h-[1312px] absolute top-[40%] right-0 translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_#742AE4_0%,_rgba(71,_19,_150,_0.50)_50%,_rgba(10,_10,_10,_0)_100%)] rounded-full -z-10 blur-3xl" />
+        <div className="w-[1312px] h-[1312px] absolute top-[85%] left-0 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_50.00%_50.00%_at_50.00%_50.00%,_#742AE4_0%,_rgba(71,_19,_150,_0.50)_50%,_rgba(10,_10,_10,_0)_100%)] rounded-full -z-10 blur-3xl" />
         <div className="pt-12">
           <HeroSection />
         </div>
@@ -25,6 +26,7 @@ export default function Home() {
         <WorkingExperiencesSection />
         <ProjectShowcaseSection />
         <ArticleSection />
+        <ContactSection />
       </main>
       <Footer />
       <style jsx global>{`

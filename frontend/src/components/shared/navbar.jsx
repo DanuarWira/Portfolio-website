@@ -37,12 +37,12 @@ export default function Navbar() {
         <a href="/" className="text-center justify-start text-neutral-50 text-sm font-normal font-['Signika_Negative'] leading-tight hover:text-gray-300 transition-colors">
           Home
         </a>
-        <a href="/" className="text-center justify-start text-neutral-50 text-sm font-normal font-['Signika_Negative'] leading-tight hover:text-gray-300 transition-colors">
+        {/* <a href="/" className="text-center justify-start text-neutral-50 text-sm font-normal font-['Signika_Negative'] leading-tight hover:text-gray-300 transition-colors">
           About me
         </a>
         <a href="/" className="text-center justify-start text-neutral-50 text-sm font-normal font-['Signika_Negative'] leading-tight hover:text-gray-300 transition-colors">
           Experiences
-        </a>
+        </a> */}
         <a href="/" className="text-center justify-start text-neutral-50 text-sm font-normal font-['Signika_Negative'] leading-tight hover:text-gray-300 transition-colors">
           Projects
         </a>
@@ -51,8 +51,12 @@ export default function Navbar() {
         </a>
       </div>
 
-      <div className={`hidden lg:flex px-6 py-3 justify-center items-center gap-2.5 ${navPillBaseClasses} ${isScrolled ? navPillScrolledClasses : navPillTopClasses}`}>
-        <button className="text-center justify-start text-neutral-50 text-sm font-normal font-['Signika_Negative'] leading-tight">Get in Touch</button>
+      <div
+        className={`hidden lg:flex px-6 py-3 justify-center items-center gap-2.5 hover:border-[#5C19C3] hover:shadow-[0px_0px_20px_#5C19C3]
+          transition-colors
+          duration-300 ${navPillBaseClasses} ${isScrolled ? navPillScrolledClasses : navPillTopClasses}`}
+      >
+        <button className="text-center justify-start text-neutral-50 text-sm font-normal font-['Signika_Negative'] leading-tight ">Get in Touch</button>
       </div>
 
       <div className="md:hidden">
@@ -68,19 +72,19 @@ export default function Navbar() {
           <a href="/" className="text-neutral-50 text-sm">
             Home
           </a>
-          <a href="/" className="text-neutral-50 text-sm">
+          {/* <a href="/" className="text-neutral-50 text-sm">
             About me
           </a>
           <a href="/" className="text-neutral-50 text-sm">
             Experiences
-          </a>
+          </a> */}
           <a href="/" className="text-neutral-50 text-sm">
             Projects
           </a>
           <a href="/" className="text-neutral-50 text-sm">
             Articles
           </a>
-          <a href="/" className="text-neutral-50 text-sm pt-2 border-t border-white/10">
+          <a href="/" className="text-neutral-50 text-sm pt-2 border-t border-white/10 ">
             Get in Touch
           </a>
         </div>
