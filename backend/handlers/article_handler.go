@@ -62,13 +62,18 @@ func (h *ArticleHandler) CreateArticles(c *gin.Context) {
 		CategoryId: categoryId,
 	}
 
-	newArticle, err := h.repository.Save(articleInput)
+	savedArticle, err := h.repository.Save(articleInput)
 	if err != nil {
+		log.Printf("Error saat menyimpan artikel: %v\n", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal menambahkan artikel"})
 		return
 	}
 
-	newArticle.CategoryId = 0
+	fullNewArticle, err := h.repository.FindByID(savedArticle.Id)
+	if err != nil {
+		c.JSON(http.StatusCreated, savedArticle)
+		return
+	}
 
-	c.JSON(http.StatusCreated, newArticle)
+	c.JSON(http.StatusCreated, fullNewArticle)
 }
