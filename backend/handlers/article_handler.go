@@ -157,7 +157,7 @@ func (h *ArticleHandler) UpdateArticle(c *gin.Context) {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Artikel tidak ditemukan untuk diupdate"})
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal mengupdate artikel"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal mengubah artikel"})
 		return
 	}
 

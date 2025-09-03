@@ -6,7 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(articleHandler *handlers.ArticleHandler) *gin.Engine {
+type Handlers struct {
+	ArticleHandler *handlers.ArticleHandler
+	SkillHandler   *handlers.SkillHandler
+}
+
+func SetupRouter(handlers *Handlers) *gin.Engine {
 	router := gin.Default()
 
 	router.Static("/public", "./public")
@@ -14,17 +19,21 @@ func SetupRouter(articleHandler *handlers.ArticleHandler) *gin.Engine {
 	api := router.Group("/api/v1")
 	{
 		//article routes
-		api.GET("/articles", articleHandler.GetArticles)
-		api.GET("/articles/:slug", articleHandler.GetArticlesBySlug)
-		api.POST("/articles", articleHandler.CreateArticles)
-		api.DELETE("/articles/:id", articleHandler.DeleteArticle)
-		api.PUT("/articles/:id", articleHandler.UpdateArticle)
+		api.GET("/articles", handlers.ArticleHandler.GetArticles)
+		api.GET("/articles/:slug", handlers.ArticleHandler.GetArticlesBySlug)
+		api.POST("/articles", handlers.ArticleHandler.CreateArticles)
+		api.DELETE("/articles/:id", handlers.ArticleHandler.DeleteArticle)
+		api.PUT("/articles/:id", handlers.ArticleHandler.UpdateArticle)
 
 		//experience routes
 
 		//portfolio routes
 
 		//skill routes
+		api.GET("/skills", handlers.SkillHandler.GetSkills)
+		api.POST("/skills", handlers.SkillHandler.CreateSkills)
+		api.DELETE("/skills/:id", handlers.SkillHandler.DeleteSkills)
+		api.PUT("/skills/:id", handlers.SkillHandler.UpdateSkills)
 	}
 
 	return router

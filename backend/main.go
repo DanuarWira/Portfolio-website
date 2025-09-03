@@ -11,10 +11,20 @@ func main() {
 	db := db.ConnectDB()
 	defer db.Close()
 
+	//repository
 	articleRepository := repositories.NewArticleRepository(db)
-	articleHandler := handlers.NewArticleHandler(articleRepository)
+	skillRepository := repositories.NewSkillRepository(db)
 
-	router := routes.SetupRouter(articleHandler)
+	//handler
+	articleHandler := handlers.NewArticleHandler(articleRepository)
+	skillHandler := handlers.NewSkillHandler(skillRepository)
+
+	handlerContainer := &routes.Handlers{
+		ArticleHandler: articleHandler,
+		SkillHandler:   skillHandler,
+	}
+
+	router := routes.SetupRouter(handlerContainer)
 
 	router.Run(":8080")
 }
