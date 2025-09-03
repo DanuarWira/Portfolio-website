@@ -7,8 +7,9 @@ import (
 )
 
 type Handlers struct {
-	ArticleHandler *handlers.ArticleHandler
-	SkillHandler   *handlers.SkillHandler
+	ArticleHandler    *handlers.ArticleHandler
+	SkillHandler      *handlers.SkillHandler
+	ExperienceHandler *handlers.ExperienceHandler
 }
 
 func SetupRouter(handlers *Handlers) *gin.Engine {
@@ -26,6 +27,10 @@ func SetupRouter(handlers *Handlers) *gin.Engine {
 		api.PUT("/articles/:id", handlers.ArticleHandler.UpdateArticle)
 
 		//experience routes
+		api.GET("/experiences", handlers.ExperienceHandler.GetExperiences)
+		api.POST("experiences", handlers.ExperienceHandler.CreateExperiences)
+		api.DELETE("/experiences/:id", handlers.ExperienceHandler.DeleteExperiences)
+		api.PUT("/experiences/:id", handlers.ExperienceHandler.UpdateExperiences)
 
 		//portfolio routes
 

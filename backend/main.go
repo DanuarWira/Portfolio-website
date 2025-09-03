@@ -14,14 +14,17 @@ func main() {
 	//repository
 	articleRepository := repositories.NewArticleRepository(db)
 	skillRepository := repositories.NewSkillRepository(db)
+	experienceRepository := repositories.NewExperienceRepository(db)
 
 	//handler
 	articleHandler := handlers.NewArticleHandler(articleRepository)
 	skillHandler := handlers.NewSkillHandler(skillRepository)
+	experienceHandler := handlers.NewExperienceHandler(experienceRepository)
 
 	handlerContainer := &routes.Handlers{
-		ArticleHandler: articleHandler,
-		SkillHandler:   skillHandler,
+		ArticleHandler:    articleHandler,
+		SkillHandler:      skillHandler,
+		ExperienceHandler: experienceHandler,
 	}
 
 	router := routes.SetupRouter(handlerContainer)
