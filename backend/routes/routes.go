@@ -10,6 +10,8 @@ type Handlers struct {
 	ArticleHandler    *handlers.ArticleHandler
 	SkillHandler      *handlers.SkillHandler
 	ExperienceHandler *handlers.ExperienceHandler
+	PortfolioHandler  *handlers.PortfolioHandler
+	UploadHandler     *handlers.UploadHandler
 }
 
 func SetupRouter(handlers *Handlers) *gin.Engine {
@@ -28,17 +30,25 @@ func SetupRouter(handlers *Handlers) *gin.Engine {
 
 		//experience routes
 		api.GET("/experiences", handlers.ExperienceHandler.GetExperiences)
-		api.POST("experiences", handlers.ExperienceHandler.CreateExperiences)
+		api.POST("/experiences", handlers.ExperienceHandler.CreateExperiences)
 		api.DELETE("/experiences/:id", handlers.ExperienceHandler.DeleteExperiences)
 		api.PUT("/experiences/:id", handlers.ExperienceHandler.UpdateExperiences)
 
 		//portfolio routes
+		api.GET("/portfolios", handlers.PortfolioHandler.GetPortfolios)
+		api.GET("/portfolios/:slug", handlers.PortfolioHandler.GetPortfoliosBySlug)
+		api.POST("/portfolios", handlers.PortfolioHandler.CreatePortfolios)
+		api.DELETE("/portfolios/:id", handlers.PortfolioHandler.DeletePortfolios)
+		api.PUT("/portfolios/:id", handlers.PortfolioHandler.UpdatePortfolios)
 
 		//skill routes
 		api.GET("/skills", handlers.SkillHandler.GetSkills)
 		api.POST("/skills", handlers.SkillHandler.CreateSkills)
 		api.DELETE("/skills/:id", handlers.SkillHandler.DeleteSkills)
 		api.PUT("/skills/:id", handlers.SkillHandler.UpdateSkills)
+
+		//upload routes
+		api.POST("/uploads", handlers.UploadHandler.UploadFile)
 	}
 
 	return router
