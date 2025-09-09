@@ -16,12 +16,14 @@ func main() {
 	skillRepository := repositories.NewSkillRepository(db)
 	experienceRepository := repositories.NewExperienceRepository(db)
 	portfolioRepository := repositories.NewPortfolioRepository(db)
+	userRepository := repositories.NewUserRepository(db)
 
 	//handler
 	articleHandler := handlers.NewArticleHandler(articleRepository)
 	skillHandler := handlers.NewSkillHandler(skillRepository)
 	experienceHandler := handlers.NewExperienceHandler(experienceRepository)
 	portfolioHandler := handlers.NewPortfolioHandler(portfolioRepository)
+	userHandler := handlers.NewUserHandler(userRepository)
 	uploadHandler := handlers.NewUploadHandler()
 
 	handlerContainer := &routes.Handlers{
@@ -29,6 +31,7 @@ func main() {
 		SkillHandler:      skillHandler,
 		ExperienceHandler: experienceHandler,
 		PortfolioHandler:  portfolioHandler,
+		UserHandler:       userHandler,
 		UploadHandler:     uploadHandler,
 	}
 
