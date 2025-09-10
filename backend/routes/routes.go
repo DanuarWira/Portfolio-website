@@ -37,9 +37,6 @@ func SetupRouter(handlers *Handlers) *gin.Engine {
 		//skill routes
 		api.GET("/skills", handlers.SkillHandler.GetSkills)
 
-		//upload routes
-		api.POST("/uploads", handlers.UploadHandler.UploadFile)
-
 		api.POST("/login", handlers.UserHandler.Login)
 		api.POST("/register", handlers.UserHandler.Register)
 
@@ -61,6 +58,8 @@ func SetupRouter(handlers *Handlers) *gin.Engine {
 			protected.POST("/skills", handlers.SkillHandler.CreateSkills)
 			protected.DELETE("/skills/:id", handlers.SkillHandler.DeleteSkills)
 			protected.PUT("/skills/:id", handlers.SkillHandler.UpdateSkills)
+
+			protected.POST("/uploads", handlers.UploadHandler.UploadFile)
 		}
 	}
 

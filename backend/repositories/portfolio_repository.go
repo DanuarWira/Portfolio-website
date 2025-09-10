@@ -23,7 +23,17 @@ func NewPortfolioRepository(db *sql.DB) PortfolioRepository {
 }
 
 func (r *portfolioRepository) FindAll() ([]models.Portfolio, error) {
-	rows, err := r.db.Query("SELECT p.id, p.title, p.slug, p.thumbnail_url, c.id as category_id, c.name as category_name, (SELECT content FROM portfolio_content_blocks WHERE portfolio_id = p.id AND block_type = 'paragraph' ORDER BY ordering ASC LIMIT 1) as description FROM portfolios p LEFT JOIN categories c ON p.category_id = c.id ORDER BY p.created_at DESC")
+	query := `
+		SELECT 
+			p.id, p.title, p.slug, p.thumbnail_url, p.description,
+			c.id as category_id, c.name as category_name,
+			(SELECT content FROM portfolio_content_blocks 
+			 WHERE portfolio_id = p.id AND block_type = 'paragraph' 
+			 ORDER BY ordering ASC LIMIT 1) as description_preview
+		FROM portfolios p 
+		LEFT JOIN categories c ON p.category_id = c.id 
+		ORDER BY p.created_at DESC`
+	rows, err := r.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -69,8 +79,8 @@ func (r *portfolioRepository) FindBySlug(slug string) (models.Portfolio, error) 
 
 	queryPortfolio := `
         SELECT 
-            p.id, p.title, p.slug, p.thumbnail_url, p.created_at, p.updated_at,
-            c.id as category_id, c.name as category_name
+            p.id, p.title, p.slug, p.thumbnail_url, p.description,
+            c.id as category_id, c.name as category_name 
         FROM portfolios p 
         LEFT JOIN categories c ON p.category_id = c.id 
         WHERE p.slug = $1`
@@ -85,6 +95,7 @@ func (r *portfolioRepository) FindBySlug(slug string) (models.Portfolio, error) 
 		&portfolio.Title,
 		&portfolio.Slug,
 		&portfolio.Thumbnail,
+		&portfolio.Description,
 		&categoryID,
 		&categoryName,
 	)
@@ -143,8 +154,8 @@ func (r *portfolioRepository) FindById(id int64) (models.Portfolio, error) {
 
 	queryPortfolio := `
         SELECT 
-            p.id, p.title, p.slug, p.thumbnail_url, p.created_at, p.updated_at,
-            c.id as category_id, c.name as category_name
+            p.id, p.title, p.slug, p.thumbnail_url, p.description,
+            c.id as category_id, c.name as category_name 
         FROM portfolios p 
         LEFT JOIN categories c ON p.category_id = c.id 
         WHERE p.id = $1`
@@ -159,6 +170,7 @@ func (r *portfolioRepository) FindById(id int64) (models.Portfolio, error) {
 		&portfolio.Title,
 		&portfolio.Slug,
 		&portfolio.Thumbnail,
+		&portfolio.Description,
 		&categoryID,
 		&categoryName,
 	)
@@ -219,10 +231,10 @@ func (r *portfolioRepository) Save(portfolio models.Portfolio) (models.Portfolio
 	}
 	defer tx.Rollback()
 
-	queryPortfolio := "INSERT INTO portfolios (title, slug, thumbnail_url, category_id) VALUES ($1, $2, $3, $4) RETURNING id"
+	queryPortfolio := "INSERT INTO portfolios (title, slug, thumbnail_url, category_id, description) VALUES ($1, $2, $3, $4, $5) RETURNING id"
 	var newPortfolioId int64
 
-	err = tx.QueryRow(queryPortfolio, portfolio.Title, portfolio.Slug, portfolio.Thumbnail, portfolio.CategoryId).Scan(&newPortfolioId)
+	err = tx.QueryRow(queryPortfolio, portfolio.Title, portfolio.Slug, portfolio.Thumbnail, portfolio.CategoryId, portfolio.Description).Scan(&newPortfolioId)
 	if err != nil {
 		return models.Portfolio{}, err
 	}
@@ -283,9 +295,9 @@ func (r *portfolioRepository) Update(portfolio models.Portfolio) (models.Portfol
 
 	queryPortfolio := `
 		UPDATE portfolios 
-		SET title = $1, slug = $2, thumbnail_url = $3, category_id = $4, updated_at = NOW() 
-		WHERE id = $5`
-	_, err = tx.Exec(queryPortfolio, portfolio.Title, portfolio.Slug, portfolio.Thumbnail, portfolio.CategoryId, portfolio.Id)
+		SET title = $1, slug = $2, thumbnail_url = $3, category_id = $4, description = $5, updated_at = NOW()  
+		WHERE id = $6`
+	_, err = tx.Exec(queryPortfolio, portfolio.Title, portfolio.Slug, portfolio.Thumbnail, portfolio.CategoryId, portfolio.Description, portfolio.Id)
 	if err != nil {
 		return models.Portfolio{}, err
 	}

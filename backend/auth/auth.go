@@ -11,7 +11,6 @@ import (
 var jwtKey = []byte("")
 
 func GenerateToken(userID uint) (string, error) {
-	// Token akan berlaku selama 24 jam
 	expirationTime := time.Now().Add(24 * time.Hour)
 
 	claims := &jwt.RegisteredClaims{
