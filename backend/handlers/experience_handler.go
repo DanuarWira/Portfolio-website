@@ -121,6 +121,7 @@ func (h *ExperienceHandler) UpdateExperiences(c *gin.Context) {
 	id, err := strconv.ParseInt(idStr, 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Id pengalaman tidak valid"})
+		return
 	}
 
 	startDateStr := c.PostForm("start_date")
@@ -152,16 +153,20 @@ func (h *ExperienceHandler) UpdateExperiences(c *gin.Context) {
 		Description: c.PostForm("description"),
 	}
 
-	savedExperience, err := h.repository.Save(experienceInput)
+	updateExperince, err := h.repository.Update(experienceInput)
 	if err != nil {
-		log.Printf("%v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal menambahkan pengalaman kerja"})
+		if err == sql.ErrNoRows {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Pengalaman tidak ditemukan"})
+			return
+		}
+		log.Printf("%s", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal mengubah pengalaman kerja"})
 		return
 	}
 
-	fullExperience, err := h.repository.FindByID(savedExperience.Id)
+	fullExperience, err := h.repository.FindByID(updateExperince.Id)
 	if err != nil {
-		c.JSON(http.StatusCreated, savedExperience)
+		c.JSON(http.StatusCreated, updateExperince)
 		return
 	}
 

@@ -62,9 +62,9 @@ func (r *experienceRepository) FindByID(id int64) (models.Experience, error) {
 		&experience.Id,
 		&experience.JobTitle,
 		&experience.CompanyName,
+		&experience.Description,
 		&experience.StartDate,
 		&endDate,
-		&experience.Description,
 	)
 	if err != nil {
 		return models.Experience{}, err
@@ -104,9 +104,9 @@ func (r *experienceRepository) Delete(id int64) error {
 }
 
 func (r *experienceRepository) Update(experience models.Experience) (models.Experience, error) {
-	query := "UPDATE experiences SET job_title = $1, company_name = $2, , description = $3, start_date = $4, end_date = $5, updated_at = NOW() WHERE id = $6"
+	query := "UPDATE experiences SET job_title = $1, company_name = $2, description = $3, start_date = $4, end_date = $5, updated_at = NOW() WHERE id = $6"
 
-	result, err := r.db.Exec(query, experience.JobTitle, experience.CompanyName, experience.StartDate, experience.EndDate, experience.Description)
+	result, err := r.db.Exec(query, experience.JobTitle, experience.CompanyName, experience.Description, experience.StartDate, experience.EndDate, experience.Id)
 	if err != nil {
 		return models.Experience{}, err
 	}
