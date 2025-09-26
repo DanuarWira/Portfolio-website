@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { LayoutPanelLeft, BookOpenText, BookText, ClipboardList, Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import { LayoutPanelLeft, BookOpenText, BookText, ClipboardList, Star, LogOut } from "lucide-react";
 import Menu from "../ui/menu";
 
 import Link from "next/link";
@@ -15,19 +15,37 @@ export default function Sidebar() {
     { name: "Skill", icon: <Star />, path: "/admin/skill" },
   ];
 
-  const pathname = usePathname();
+  const [pathname, setPathname] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setPathname(window.location.pathname);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    window.location.href = "/";
+  };
 
   return (
     <>
-      <aside className="flex flex-col p-6 gap-4 bg-white">
-        {menuItems.map((item) => {
-          const IsActive = pathname === item.path;
-          return (
-            <Link key={item.name} href={item.path} className={`w-full text-left rounded-xl transition-colors duration-200 group ${IsActive ? "bg-primary-50" : "hover:bg-gray-100"}`} onClick={() => setActiveMenu(item.name)}>
-              <Menu Text={item.name} Icon={item.icon} IsActive={IsActive} />
-            </Link>
-          );
-        })}
+      <aside className="flex flex-col justify-between p-6 gap-4 bg-white h-full">
+        <div className="flex flex-col gap-4">
+          {menuItems.map((item) => {
+            const IsActive = pathname === item.path;
+            return (
+              <Link key={item.name} href={item.path} className={`w-full text-left rounded-xl transition-colors duration-200 group ${IsActive ? "bg-primary-50" : "hover:bg-gray-100"}`} onClick={() => setActiveMenu(item.name)}>
+                <Menu Text={item.name} Icon={item.icon} IsActive={IsActive} />
+              </Link>
+            );
+          })}
+        </div>
+        <div>
+          <button onClick={handleLogout} className="w-full text-left rounded-xl transition-colors duration-200 group hover:bg-gray-100">
+            <Menu Text="Logout" Icon={<LogOut />} IsActive={false} />
+          </button>
+        </div>
       </aside>
     </>
   );

@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
-import axios from "axios";
 import { X } from "lucide-react";
 import { Button } from "@/components/shared/button";
+import { useState, useEffect } from "react";
+import { api } from "@/app/api/api";
 
 export default function ExperienceModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
