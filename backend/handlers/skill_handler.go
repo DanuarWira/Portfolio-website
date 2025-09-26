@@ -30,6 +30,15 @@ func (h *SkillHandler) GetSkills(c *gin.Context) {
 }
 
 func (h *SkillHandler) CreateSkills(c *gin.Context) {
+	skillName := c.PostForm("name")
+	log.Printf("Menerima request untuk membuat skill dengan nama: '%s'", skillName)
+
+	if skillName == "" {
+		log.Println("VALIDATION FAILED: Nama skill yang diterima kosong atau tidak ada dalam form.")
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Field 'name' tidak boleh kosong"})
+		return
+	}
+
 	skillInput := models.Skill{
 		Name: c.PostForm("name"),
 	}

@@ -4,6 +4,7 @@ import (
 	"backend/auth"
 	"backend/handlers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +19,11 @@ type Handlers struct {
 
 func SetupRouter(handlers *Handlers) *gin.Engine {
 	router := gin.Default()
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
+	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
+	router.Use(cors.New(config))
 
 	router.Static("/public", "./public")
 
