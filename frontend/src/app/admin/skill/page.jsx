@@ -35,26 +35,23 @@ export default function SkillPage() {
   }, []);
 
   const handleAddClick = () => {
-    setSkillToEdit(null); // Pastikan state untuk edit kosong
+    setSkillToEdit(null);
     setIsModalOpen(true);
   };
 
-  // 2. Fungsi untuk membuka modal dalam mode "Edit"
   const handleEditClick = (skill) => {
-    setSkillToEdit(skill); // Simpan data skill yang akan diedit ke state
+    setSkillToEdit(skill);
     setIsModalOpen(true);
   };
 
-  // 3. Fungsi untuk menutup modal dan membersihkan state
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSkillToEdit(null); // PENTING: Selalu reset state setelah modal ditutup
+    setSkillToEdit(null);
   };
 
-  // 4. Fungsi yang dipanggil setelah sukses (menambah/mengedit)
   const handleSuccess = () => {
-    fetchSkills(); // Ambil data terbaru
-    handleCloseModal(); // Tutup modal
+    fetchSkills();
+    handleCloseModal();
   };
 
   const handleDeleteClick = (skill) => {

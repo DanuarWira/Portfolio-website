@@ -49,7 +49,6 @@ export default function SkillModal({ isOpen, onClose, skillToEdit, onSuccess }) 
     }
   };
 
-  // Tampilan error bisa disesuaikan, ini hanya untuk menampilkan pesan jika ada.
   if (error) return <div className="p-6 text-red-600">Error: {error}</div>;
 
   return (
